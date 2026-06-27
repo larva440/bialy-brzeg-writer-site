@@ -57,7 +57,7 @@ function PostPage() {
           {post.title}
         </h1>
         <div className="prose-literary">
-          {post.content.map((p, i) => (
+          {post.content.map((p: string, i: number) => (
             <p key={i}>{p}</p>
           ))}
         </div>
