@@ -15,7 +15,7 @@ export const Route = createFileRoute("/kontakt")({
 });
 
 // TODO: wstaw własny klucz z https://web3forms.com
-const WEB3FORMS_ACCESS_KEY = "[ACCESS_KEY]";
+const WEB3FORMS_ACCESS_KEY = "abb7849e-0601-4437-b4f3-d251ecd69c7f";
 
 type Status = "idle" | "loading" | "success" | "error";
 
