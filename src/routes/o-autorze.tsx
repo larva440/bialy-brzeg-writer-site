@@ -21,7 +21,7 @@ function About() {
           O autorze
         </p>
         <h1 className="mb-12 font-serif text-3xl text-ink md:text-4xl">
-          Piszę z miejsca spokoju o czasie, gdy spokoju nie było.
+          Biały Brzeg
         </h1>
         <div className="prose-literary">
           <p>
@@ -29,10 +29,20 @@ function About() {
             tak jak je pamiętam — bez upiększania.
           </p>
           <p>
-            O tym, jak zamknięty system wciąga zwykłego człowieka, i o
-            drzwiach, które przez cały czas są otwarte od środka.
+            Przez pewien czas byłem w środku zamkniętego systemu, który
+            tłumaczył mi, że moje wątpliwości to mój opór. Wyszedłem. Piszę
+            o tym, jak takie miejsce wciąga zwykłego człowieka, i o drzwiach,
+            które przez cały czas są otwarte od środka — tylko nie zawsze się
+            je widzi.
           </p>
-          <p>Piszę z miejsca spokoju o czasie, gdy spokoju nie było.</p>
+          <p>
+            Interesuje mnie pamięć, która dokręca zakończenia, i pewność,
+            która potrafi być chorobą. Piszę z miejsca spokoju o czasie, gdy
+            spokoju nie było.
+          </p>
+          <p>
+            Piszę krótkie i dłuższe formy.
+          </p>
         </div>
       </article>
     </SiteLayout>
