@@ -13,6 +13,7 @@ import { Route as OAutorzeRouteImport } from './routes/o-autorze'
 import { Route as KontaktRouteImport } from './routes/kontakt'
 import { Route as SeriesRouteImport } from './routes/$series'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SeriesSlugRouteImport } from './routes/$series.$slug'
 
 const OAutorzeRoute = OAutorzeRouteImport.update({
   id: '/o-autorze',
@@ -34,37 +35,46 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SeriesSlugRoute = SeriesSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => SeriesRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/$series': typeof SeriesRoute
+  '/$series': typeof SeriesRouteWithChildren
   '/kontakt': typeof KontaktRoute
   '/o-autorze': typeof OAutorzeRoute
+  '/$series/$slug': typeof SeriesSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/$series': typeof SeriesRoute
+  '/$series': typeof SeriesRouteWithChildren
   '/kontakt': typeof KontaktRoute
   '/o-autorze': typeof OAutorzeRoute
+  '/$series/$slug': typeof SeriesSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/$series': typeof SeriesRoute
+  '/$series': typeof SeriesRouteWithChildren
   '/kontakt': typeof KontaktRoute
   '/o-autorze': typeof OAutorzeRoute
+  '/$series/$slug': typeof SeriesSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/$series' | '/kontakt' | '/o-autorze'
+  fullPaths: '/' | '/$series' | '/kontakt' | '/o-autorze' | '/$series/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/$series' | '/kontakt' | '/o-autorze'
-  id: '__root__' | '/' | '/$series' | '/kontakt' | '/o-autorze'
+  to: '/' | '/$series' | '/kontakt' | '/o-autorze' | '/$series/$slug'
+  id:
+    '__root__' | '/' | '/$series' | '/kontakt' | '/o-autorze' | '/$series/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  SeriesRoute: typeof SeriesRoute
+  SeriesRoute: typeof SeriesRouteWithChildren
   KontaktRoute: typeof KontaktRoute
   OAutorzeRoute: typeof OAutorzeRoute
 }
@@ -99,12 +109,30 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/$series/$slug': {
+      id: '/$series/$slug'
+      path: '/$slug'
+      fullPath: '/$series/$slug'
+      preLoaderRoute: typeof SeriesSlugRouteImport
+      parentRoute: typeof SeriesRoute
+    }
   }
 }
 
+interface SeriesRouteChildren {
+  SeriesSlugRoute: typeof SeriesSlugRoute
+}
+
+const SeriesRouteChildren: SeriesRouteChildren = {
+  SeriesSlugRoute: SeriesSlugRoute,
+}
+
+const SeriesRouteWithChildren =
+  SeriesRoute._addFileChildren(SeriesRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  SeriesRoute: SeriesRoute,
+  SeriesRoute: SeriesRouteWithChildren,
   KontaktRoute: KontaktRoute,
   OAutorzeRoute: OAutorzeRoute,
 }
