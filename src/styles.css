@@ -69,10 +69,17 @@
 
 @utility prose-literary {
   font-family: var(--font-serif);
-  font-size: 1.15rem;
-  line-height: 1.8;
+  font-size: 1.25rem;
+  line-height: 1.85;
   color: var(--color-ink-soft);
   & p {
-    margin-bottom: 1.5em;
+    margin-bottom: 1.6em;
+  }
+}
+
+@media (min-width: 768px) {
+  @utility prose-literary {
+    font-size: 1.35rem;
+    line-height: 1.8;
   }
 }
