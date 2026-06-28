@@ -45,10 +45,9 @@ export const Route = createFileRoute("/$series")({
 
 function SeriesLayout() {
   const matches = useMatches();
+  const { meta, posts } = Route.useLoaderData();
   const isChild = matches.some((m) => m.routeId === "/$series/$slug");
   if (isChild) return <Outlet />;
-
-  const { meta, posts } = Route.useLoaderData();
 
   return (
     <SiteLayout>
