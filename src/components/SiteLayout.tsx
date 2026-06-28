@@ -13,7 +13,7 @@ function NavLink({
 }) {
   return (
     <Link
-      to={to}
+      to={to as any}
       params={params as any}
       className="text-sm tracking-wide text-ink-soft transition-colors hover:text-ink"
       activeProps={{ className: "text-ink" }}
