@@ -14,6 +14,8 @@ import { Route as KontaktRouteImport } from './routes/kontakt'
 import { Route as SeriesRouteImport } from './routes/$series'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SeriesSlugRouteImport } from './routes/$series.$slug'
+import { Route as HakerdoorDateSeriesRouteImport } from './routes/hakerdoor.$date.$series'
+import { Route as HakerdoorDateSeriesSlugRouteImport } from './routes/hakerdoor.$date.$series.$slug'
 
 const OAutorzeRoute = OAutorzeRouteImport.update({
   id: '/o-autorze',
@@ -40,6 +42,16 @@ const SeriesSlugRoute = SeriesSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => SeriesRoute,
 } as any)
+const HakerdoorDateSeriesRoute = HakerdoorDateSeriesRouteImport.update({
+  id: '/hakerdoor/$date/$series',
+  path: '/hakerdoor/$date/$series',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HakerdoorDateSeriesSlugRoute = HakerdoorDateSeriesSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => HakerdoorDateSeriesRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -47,6 +59,8 @@ export interface FileRoutesByFullPath {
   '/kontakt': typeof KontaktRoute
   '/o-autorze': typeof OAutorzeRoute
   '/$series/$slug': typeof SeriesSlugRoute
+  '/hakerdoor/$date/$series': typeof HakerdoorDateSeriesRouteWithChildren
+  '/hakerdoor/$date/$series/$slug': typeof HakerdoorDateSeriesSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +68,8 @@ export interface FileRoutesByTo {
   '/kontakt': typeof KontaktRoute
   '/o-autorze': typeof OAutorzeRoute
   '/$series/$slug': typeof SeriesSlugRoute
+  '/hakerdoor/$date/$series': typeof HakerdoorDateSeriesRouteWithChildren
+  '/hakerdoor/$date/$series/$slug': typeof HakerdoorDateSeriesSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,12 +78,28 @@ export interface FileRoutesById {
   '/kontakt': typeof KontaktRoute
   '/o-autorze': typeof OAutorzeRoute
   '/$series/$slug': typeof SeriesSlugRoute
+  '/hakerdoor/$date/$series': typeof HakerdoorDateSeriesRouteWithChildren
+  '/hakerdoor/$date/$series/$slug': typeof HakerdoorDateSeriesSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/$series' | '/kontakt' | '/o-autorze' | '/$series/$slug'
+  fullPaths:
+    | '/'
+    | '/$series'
+    | '/kontakt'
+    | '/o-autorze'
+    | '/$series/$slug'
+    | '/hakerdoor/$date/$series'
+    | '/hakerdoor/$date/$series/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/$series' | '/kontakt' | '/o-autorze' | '/$series/$slug'
+  to:
+    | '/'
+    | '/$series'
+    | '/kontakt'
+    | '/o-autorze'
+    | '/$series/$slug'
+    | '/hakerdoor/$date/$series'
+    | '/hakerdoor/$date/$series/$slug'
   id:
     | '__root__'
     | '/'
@@ -75,6 +107,8 @@ export interface FileRouteTypes {
     | '/kontakt'
     | '/o-autorze'
     | '/$series/$slug'
+    | '/hakerdoor/$date/$series'
+    | '/hakerdoor/$date/$series/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -82,6 +116,7 @@ export interface RootRouteChildren {
   SeriesRoute: typeof SeriesRouteWithChildren
   KontaktRoute: typeof KontaktRoute
   OAutorzeRoute: typeof OAutorzeRoute
+  HakerdoorDateSeriesRoute: typeof HakerdoorDateSeriesRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -121,6 +156,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SeriesSlugRouteImport
       parentRoute: typeof SeriesRoute
     }
+    '/hakerdoor/$date/$series': {
+      id: '/hakerdoor/$date/$series'
+      path: '/hakerdoor/$date/$series'
+      fullPath: '/hakerdoor/$date/$series'
+      preLoaderRoute: typeof HakerdoorDateSeriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hakerdoor/$date/$series/$slug': {
+      id: '/hakerdoor/$date/$series/$slug'
+      path: '/$slug'
+      fullPath: '/hakerdoor/$date/$series/$slug'
+      preLoaderRoute: typeof HakerdoorDateSeriesSlugRouteImport
+      parentRoute: typeof HakerdoorDateSeriesRoute
+    }
   }
 }
 
@@ -135,11 +184,23 @@ const SeriesRouteChildren: SeriesRouteChildren = {
 const SeriesRouteWithChildren =
   SeriesRoute._addFileChildren(SeriesRouteChildren)
 
+interface HakerdoorDateSeriesRouteChildren {
+  HakerdoorDateSeriesSlugRoute: typeof HakerdoorDateSeriesSlugRoute
+}
+
+const HakerdoorDateSeriesRouteChildren: HakerdoorDateSeriesRouteChildren = {
+  HakerdoorDateSeriesSlugRoute: HakerdoorDateSeriesSlugRoute,
+}
+
+const HakerdoorDateSeriesRouteWithChildren =
+  HakerdoorDateSeriesRoute._addFileChildren(HakerdoorDateSeriesRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   SeriesRoute: SeriesRouteWithChildren,
   KontaktRoute: KontaktRoute,
   OAutorzeRoute: OAutorzeRoute,
+  HakerdoorDateSeriesRoute: HakerdoorDateSeriesRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
