@@ -8,23 +8,19 @@ import {
 import { SiteLayout } from "@/components/SiteLayout";
 import { getSeriesPage, type Post } from "@/lib/posts";
 
-export const Route = createFileRoute("/$series")({
+export const Route = createFileRoute("/hakerdoor/$date/$series")({
   loader: async ({ params }) => {
-    const data = await getSeriesPage({ data: { series: params.series } });
+    const data = await getSeriesPage({
+      data: { series: params.series, preview: params.date },
+    });
     if (!data) throw notFound();
     return data;
   },
   head: ({ loaderData }) => {
     const meta = loaderData?.meta;
     const title = meta ? `${meta.name} — Biały Brzeg` : "Biały Brzeg";
-    const desc = meta?.description ?? "";
     return {
-      meta: [
-        { title },
-        { name: "description", content: desc },
-        { property: "og:title", content: title },
-        { property: "og:description", content: desc },
-      ],
+      meta: [{ title }, { name: "robots", content: "noindex, nofollow" }],
     };
   },
   notFoundComponent: () => (
@@ -40,21 +36,24 @@ export const Route = createFileRoute("/$series")({
       </div>
     </SiteLayout>
   ),
-  component: SeriesLayout,
+  component: PreviewSeriesLayout,
 });
 
-function SeriesLayout() {
+function PreviewSeriesLayout() {
   const matches = useMatches();
-  const isChild = matches.some((m) => m.routeId === "/$series/$slug");
+  const isChild = matches.some(
+    (m) => m.routeId === "/hakerdoor/$date/$series/$slug",
+  );
   if (isChild) return <Outlet />;
 
+  const { date } = Route.useParams();
   const { meta, posts } = Route.useLoaderData();
 
   return (
     <SiteLayout>
       <section className="mx-auto max-w-3xl px-6 py-24 md:py-32">
         <p className="mb-6 text-xs uppercase tracking-[0.3em] text-muted-foreground">
-          {meta.name}
+          {meta.name} · podgląd {date}
         </p>
         <h1 className="mb-16 font-serif text-3xl text-ink md:text-4xl">
           {meta.heading || meta.name}
@@ -63,8 +62,8 @@ function SeriesLayout() {
           {posts.map((post: Post) => (
             <li key={post.slug} className="py-10 first:pt-0">
               <Link
-                to="/$series/$slug"
-                params={{ series: meta.slug, slug: post.slug }}
+                to="/hakerdoor/$date/$series/$slug"
+                params={{ date, series: meta.slug, slug: post.slug }}
                 className="group block"
               >
                 <p className="mb-3 text-xs uppercase tracking-[0.25em] text-muted-foreground">
