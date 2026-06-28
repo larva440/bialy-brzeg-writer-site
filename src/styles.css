@@ -69,7 +69,7 @@
 
 @utility prose-literary {
   font-family: var(--font-serif);
-  font-size: 1.25rem;
+  font-size: var(--prose-size, 1.25rem);
   line-height: 1.85;
   color: var(--color-ink-soft);
   & p {
@@ -78,8 +78,7 @@
 }
 
 @media (min-width: 768px) {
-  @utility prose-literary {
-    font-size: 1.35rem;
-    line-height: 1.8;
+  :root {
+    --prose-size: 1.35rem;
   }
 }
