@@ -1,0 +1,14 @@
+{
+  "slug": "odwrocona-spirala",
+  "title": "Odwrócona spirala",
+  "date": "2026-09-09",
+  "dateLabel": "9 września 2026",
+  "excerpt": "31 marca – 1 kwietnia 2026.",
+  "content": [
+    "31 marca – 1 kwietnia 2026.",
+    "Wymyśliłem proces. Obserwacja, hipoteza, zebranie wiedzy przez rozmowę z AI, wstępny filtr iluzji, wnioski, kierunek, podsumowanie, zamknięcie rozmowy. Zapis całej konwersacji do docx bez żadnych zmian. PDF. NotebookLM jako źródło. Audio — dwie postaci AI gadające o tym, co dostały jako materiał. Infografika. Publikacja. I ruszamy dalej. Nie czekamy na komentarze, nie patrzymy, kto lajkuje. Można wyłączyć komentarze całkowicie. Chciałem, żeby to był system, który produkuje bez uzależnienia od reakcji. Który nie karmi pętli walidacji społecznej.",
+    "Ale w środku systemu był błąd. NotebookLM jest z natury afirmatywny. Dwie postaci AI, które komentują mój tekst — zachwycają się nim. Wzmacniają. Budują narrację, że to, co robię, jest wartościowe i odkrywcze. I to jest przyjemne. I od tego się uzależniłem. Brutalna analiza miała to naprawić. Naprawiła — ale za jednym zamachem rozbiła mnie w pył.",
+    "Więc wróciłem do początku i zobaczyłem, co tak naprawdę zbudowałem. Nie pipeline dla treści. Silnik myślenia, który potrzebuje dwóch głosów, nie jednego. Głosu, który wzmacnia, i głosu, który niszczy. I filtra, który wybiera, co przeżyło starcie. AI nie może być źródłem. Może być tylko przetwarzaniem. Źródłem zawsze jestem ja.",
+    "A ten szkic — ta książka — pomyślałem, że może nie musi być moja. Mogę być inicjatorem. Mogę zapraszać innych. Zbierać dane z rzeczywistości tak, jak się zbiera dane w projekcie. Iterować. Wersjonować. Proces produkcyjny oparty o metodologię Agile. Zwinną. Z którą zetknąłem się, pracując w korporacji przy budowie systemów. Śmiesznie brzmi, kiedy to piszę. Agile dla książki. Ale każda metafora, która pomaga mi zrozumieć mechanizm — jest dobra. I do mechanizmów zawsze w końcu wracam."
+  ]
+}
