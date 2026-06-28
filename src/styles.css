@@ -31,6 +31,7 @@
   --muted-foreground: oklch(0.48 0.01 250);
   --ink: oklch(0.20 0.012 250);
   --ink-soft: oklch(0.32 0.012 250);
+  --prose-size: 1.25rem;
 }
 
 @layer base {
