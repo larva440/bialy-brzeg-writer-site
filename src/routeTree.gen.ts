@@ -69,7 +69,12 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to: '/' | '/$series' | '/kontakt' | '/o-autorze' | '/$series/$slug'
   id:
-    '__root__' | '/' | '/$series' | '/kontakt' | '/o-autorze' | '/$series/$slug'
+    | '__root__'
+    | '/'
+    | '/$series'
+    | '/kontakt'
+    | '/o-autorze'
+    | '/$series/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {

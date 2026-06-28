@@ -55,7 +55,7 @@ function PostPage() {
         <Link
           to="/$series"
           params={{ series: seriesSlug }}
-          search={(prev) => prev}
+          search={(prev: any) => prev}
           className="mb-12 inline-block text-xs uppercase tracking-[0.25em] text-muted-foreground hover:text-ink"
         >
           ← {seriesName}
@@ -77,7 +77,7 @@ function PostPage() {
               <Link
                 to="/$series/$slug"
                 params={{ series: seriesSlug, slug: prev.slug }}
-                search={(prev) => prev}
+                search={(prev: any) => prev}
                 className="block text-muted-foreground hover:text-ink"
               >
                 <span className="block text-xs uppercase tracking-[0.25em]">
@@ -94,7 +94,7 @@ function PostPage() {
               <Link
                 to="/$series/$slug"
                 params={{ series: seriesSlug, slug: next.slug }}
-                search={(prev) => prev}
+                search={(prev: any) => prev}
                 className="block text-muted-foreground hover:text-ink"
               >
                 <span className="block text-xs uppercase tracking-[0.25em]">

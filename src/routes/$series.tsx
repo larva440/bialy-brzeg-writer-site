@@ -71,7 +71,7 @@ function SeriesLayout() {
               <Link
                 to="/$series/$slug"
                 params={{ series: meta.slug, slug: post.slug }}
-                search={(prev) => prev}
+                search={(prev: any) => prev}
                 className="group block"
               >
                 <p className="mb-3 text-xs uppercase tracking-[0.25em] text-muted-foreground">
