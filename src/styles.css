@@ -31,6 +31,7 @@
   --muted-foreground: oklch(0.48 0.01 250);
   --ink: oklch(0.20 0.012 250);
   --ink-soft: oklch(0.32 0.012 250);
+  --prose-size: 1.25rem;
 }
 
 @layer base {
@@ -69,10 +70,16 @@
 
 @utility prose-literary {
   font-family: var(--font-serif);
-  font-size: 1.15rem;
-  line-height: 1.8;
+  font-size: var(--prose-size, 1.25rem);
+  line-height: 1.85;
   color: var(--color-ink-soft);
   & p {
-    margin-bottom: 1.5em;
+    margin-bottom: 1.6em;
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --prose-size: 1.35rem;
   }
 }
