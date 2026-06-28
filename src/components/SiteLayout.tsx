@@ -32,11 +32,11 @@ export function SiteLayout({ children }: { children: ReactNode }) {
   return (
     <div className="flex min-h-screen flex-col bg-paper text-foreground">
       <header className="border-b border-rule/60">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-6 md:py-8">
-          <Link to="/" className="font-serif text-lg tracking-tight text-ink">
+        <div className="mx-auto flex max-w-5xl flex-col items-start justify-between gap-4 px-6 py-6 md:flex-row md:items-center md:gap-0 md:py-8">
+          <Link to="/" className="shrink-0 font-serif text-lg tracking-tight text-ink">
             Biały Brzeg
           </Link>
-          <nav className="flex items-center gap-6 md:gap-10">
+          <nav className="flex flex-wrap items-center gap-4 md:gap-10">
             <NavLink to="/o-autorze">O autorze</NavLink>
             {series.map((s) => (
               <NavLink key={s.slug} to="/$series" params={{ series: s.slug }}>
