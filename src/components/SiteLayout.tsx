@@ -26,7 +26,7 @@ function NavLink({
 
 export function SiteLayout({ children }: { children: ReactNode }) {
   const year = new Date().getFullYear();
-  const series = (useLoaderData({ from: "__root__", strict: false }) ??
+  const series = (useLoaderData({ from: "__root__" as any }) ??
     []) as SeriesMeta[];
 
   return (
