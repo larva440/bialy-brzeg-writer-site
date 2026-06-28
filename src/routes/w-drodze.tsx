@@ -1,8 +1,9 @@
 import { createFileRoute, Link, Outlet, useMatches } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
-import { posts } from "@/lib/posts";
+import { getPublishedPosts } from "@/lib/posts";
 
 export const Route = createFileRoute("/w-drodze")({
+  loader: () => getPublishedPosts(),
   head: () => ({
     meta: [
       { title: "W Drodze — Biały Brzeg" },
@@ -18,6 +19,8 @@ function WDrodzeLayout() {
   const matches = useMatches();
   const isChild = matches.some((m) => m.routeId === "/w-drodze/$slug");
   if (isChild) return <Outlet />;
+
+  const posts = Route.useLoaderData();
 
   return (
     <SiteLayout>
