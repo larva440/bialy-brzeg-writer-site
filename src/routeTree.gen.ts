@@ -9,17 +9,10 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as WDrodzeRouteImport } from './routes/w-drodze'
 import { Route as OAutorzeRouteImport } from './routes/o-autorze'
 import { Route as KontaktRouteImport } from './routes/kontakt'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as WDrodzeSlugRouteImport } from './routes/w-drodze.$slug'
 
-const WDrodzeRoute = WDrodzeRouteImport.update({
-  id: '/w-drodze',
-  path: '/w-drodze',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const OAutorzeRoute = OAutorzeRouteImport.update({
   id: '/o-autorze',
   path: '/o-autorze',
@@ -35,64 +28,39 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const WDrodzeSlugRoute = WDrodzeSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => WDrodzeRoute,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/kontakt': typeof KontaktRoute
   '/o-autorze': typeof OAutorzeRoute
-  '/w-drodze': typeof WDrodzeRouteWithChildren
-  '/w-drodze/$slug': typeof WDrodzeSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/kontakt': typeof KontaktRoute
   '/o-autorze': typeof OAutorzeRoute
-  '/w-drodze': typeof WDrodzeRouteWithChildren
-  '/w-drodze/$slug': typeof WDrodzeSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/kontakt': typeof KontaktRoute
   '/o-autorze': typeof OAutorzeRoute
-  '/w-drodze': typeof WDrodzeRouteWithChildren
-  '/w-drodze/$slug': typeof WDrodzeSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/kontakt' | '/o-autorze' | '/w-drodze' | '/w-drodze/$slug'
+  fullPaths: '/' | '/kontakt' | '/o-autorze'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/kontakt' | '/o-autorze' | '/w-drodze' | '/w-drodze/$slug'
-  id:
-    | '__root__'
-    | '/'
-    | '/kontakt'
-    | '/o-autorze'
-    | '/w-drodze'
-    | '/w-drodze/$slug'
+  to: '/' | '/kontakt' | '/o-autorze'
+  id: '__root__' | '/' | '/kontakt' | '/o-autorze'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   KontaktRoute: typeof KontaktRoute
   OAutorzeRoute: typeof OAutorzeRoute
-  WDrodzeRoute: typeof WDrodzeRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/w-drodze': {
-      id: '/w-drodze'
-      path: '/w-drodze'
-      fullPath: '/w-drodze'
-      preLoaderRoute: typeof WDrodzeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/o-autorze': {
       id: '/o-autorze'
       path: '/o-autorze'
@@ -114,32 +82,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/w-drodze/$slug': {
-      id: '/w-drodze/$slug'
-      path: '/$slug'
-      fullPath: '/w-drodze/$slug'
-      preLoaderRoute: typeof WDrodzeSlugRouteImport
-      parentRoute: typeof WDrodzeRoute
-    }
   }
 }
-
-interface WDrodzeRouteChildren {
-  WDrodzeSlugRoute: typeof WDrodzeSlugRoute
-}
-
-const WDrodzeRouteChildren: WDrodzeRouteChildren = {
-  WDrodzeSlugRoute: WDrodzeSlugRoute,
-}
-
-const WDrodzeRouteWithChildren =
-  WDrodzeRoute._addFileChildren(WDrodzeRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   KontaktRoute: KontaktRoute,
   OAutorzeRoute: OAutorzeRoute,
-  WDrodzeRoute: WDrodzeRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
