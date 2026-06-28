@@ -2,10 +2,10 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { getPostBundle } from "@/lib/posts";
 
-export const Route = createFileRoute("/$series/$slug")({
+export const Route = createFileRoute("/hakerdoor/$date/$series/$slug")({
   loader: async ({ params }) => {
     const bundle = await getPostBundle({
-      data: { series: params.series, slug: params.slug },
+      data: { series: params.series, slug: params.slug, preview: params.date },
     });
     if (!bundle) throw notFound();
     return bundle;
@@ -13,15 +13,8 @@ export const Route = createFileRoute("/$series/$slug")({
   head: ({ loaderData }) => {
     const post = loaderData?.post;
     const title = post ? `${post.title} — Biały Brzeg` : "Biały Brzeg";
-    const desc = post?.excerpt ?? "";
     return {
-      meta: [
-        { title },
-        { name: "description", content: desc },
-        { property: "og:title", content: title },
-        { property: "og:description", content: desc },
-        { property: "og:type", content: "article" },
-      ],
+      meta: [{ title }, { name: "robots", content: "noindex, nofollow" }],
     };
   },
   notFoundComponent: () => (
@@ -37,10 +30,11 @@ export const Route = createFileRoute("/$series/$slug")({
       </div>
     </SiteLayout>
   ),
-  component: PostPage,
+  component: PreviewPostPage,
 });
 
-function PostPage() {
+function PreviewPostPage() {
+  const { date } = Route.useParams();
   const { meta, post, prev, next } = Route.useLoaderData();
   const seriesSlug = meta?.slug ?? post.series;
   const seriesName = meta?.name ?? seriesSlug;
@@ -49,14 +43,14 @@ function PostPage() {
     <SiteLayout>
       <article className="mx-auto max-w-2xl px-6 py-24 md:py-32">
         <Link
-          to="/$series"
-          params={{ series: seriesSlug }}
+          to="/hakerdoor/$date/$series"
+          params={{ date, series: seriesSlug }}
           className="mb-12 inline-block text-xs uppercase tracking-[0.25em] text-muted-foreground hover:text-ink"
         >
           ← {seriesName}
         </Link>
         <p className="mb-4 text-xs uppercase tracking-[0.3em] text-muted-foreground">
-          {post.dateLabel}
+          {post.dateLabel} · podgląd {date}
         </p>
         <h1 className="mb-12 font-serif text-3xl leading-tight text-ink md:text-5xl">
           {post.title}
@@ -70,8 +64,8 @@ function PostPage() {
           <div>
             {prev && (
               <Link
-                to="/$series/$slug"
-                params={{ series: seriesSlug, slug: prev.slug }}
+                to="/hakerdoor/$date/$series/$slug"
+                params={{ date, series: seriesSlug, slug: prev.slug }}
                 className="block text-muted-foreground hover:text-ink"
               >
                 <span className="block text-xs uppercase tracking-[0.25em]">
@@ -86,8 +80,8 @@ function PostPage() {
           <div className="text-right">
             {next && (
               <Link
-                to="/$series/$slug"
-                params={{ series: seriesSlug, slug: next.slug }}
+                to="/hakerdoor/$date/$series/$slug"
+                params={{ date, series: seriesSlug, slug: next.slug }}
                 className="block text-muted-foreground hover:text-ink"
               >
                 <span className="block text-xs uppercase tracking-[0.25em]">
@@ -100,14 +94,6 @@ function PostPage() {
             )}
           </div>
         </nav>
-        <p className="mt-16 text-center text-xs leading-relaxed text-muted-foreground">
-          Jeśli mierzysz się z kryzysem — Centrum Wsparcia dla osób w kryzysie
-          psychicznym:{" "}
-          <a href="tel:+48800702222" className="underline-offset-4 hover:underline">
-            800 70 2222
-          </a>{" "}
-          (całodobowo, bezpłatnie).
-        </p>
       </article>
     </SiteLayout>
   );
