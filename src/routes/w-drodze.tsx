@@ -1,8 +1,9 @@
 import { createFileRoute, Link, Outlet, useMatches } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
-import { posts } from "@/lib/posts";
+import { getPublishedPosts, type Post } from "@/lib/posts";
 
 export const Route = createFileRoute("/w-drodze")({
+  loader: () => getPublishedPosts(),
   head: () => ({
     meta: [
       { title: "W Drodze — Biały Brzeg" },
@@ -19,6 +20,8 @@ function WDrodzeLayout() {
   const isChild = matches.some((m) => m.routeId === "/w-drodze/$slug");
   if (isChild) return <Outlet />;
 
+  const posts = Route.useLoaderData();
+
   return (
     <SiteLayout>
       <section className="mx-auto max-w-3xl px-6 py-24 md:py-32">
@@ -29,7 +32,7 @@ function WDrodzeLayout() {
           Krótkie eseje. Zapisy z drogi.
         </h1>
         <ul className="divide-y divide-rule/70">
-          {posts.map((post) => (
+          {posts.map((post: Post) => (
             <li key={post.slug} className="py-10 first:pt-0">
               <Link
                 to="/w-drodze/$slug"

@@ -1,12 +1,12 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
-import { getPost, posts } from "@/lib/posts";
+import { getPostBundle } from "@/lib/posts";
 
 export const Route = createFileRoute("/w-drodze/$slug")({
-  loader: ({ params }) => {
-    const post = getPost(params.slug);
-    if (!post) throw notFound();
-    return { post };
+  loader: async ({ params }) => {
+    const bundle = await getPostBundle({ data: params.slug });
+    if (!bundle) throw notFound();
+    return bundle;
   },
   head: ({ loaderData }) => {
     const post = loaderData?.post;
@@ -36,10 +36,7 @@ export const Route = createFileRoute("/w-drodze/$slug")({
 });
 
 function PostPage() {
-  const { post } = Route.useLoaderData();
-  const idx = posts.findIndex((p) => p.slug === post.slug);
-  const prev = posts[idx + 1];
-  const next = posts[idx - 1];
+  const { post, prev, next } = Route.useLoaderData();
 
   return (
     <SiteLayout>
@@ -87,6 +84,13 @@ function PostPage() {
             )}
           </div>
         </nav>
+        <p className="mt-16 text-center text-xs leading-relaxed text-muted-foreground">
+          Jeśli mierzysz się z kryzysem — Centrum Wsparcia dla osób w kryzysie psychicznym:{" "}
+          <a href="tel:+48800702222" className="underline-offset-4 hover:underline">
+            800 70 2222
+          </a>{" "}
+          (całodobowo, bezpłatnie).
+        </p>
       </article>
     </SiteLayout>
   );
