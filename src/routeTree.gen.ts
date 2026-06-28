@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as OAutorzeRouteImport } from './routes/o-autorze'
 import { Route as KontaktRouteImport } from './routes/kontakt'
+import { Route as SeriesRouteImport } from './routes/$series'
 import { Route as IndexRouteImport } from './routes/index'
 
 const OAutorzeRoute = OAutorzeRouteImport.update({
@@ -23,6 +24,11 @@ const KontaktRoute = KontaktRouteImport.update({
   path: '/kontakt',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SeriesRoute = SeriesRouteImport.update({
+  id: '/$series',
+  path: '/$series',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -31,30 +37,34 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/$series': typeof SeriesRoute
   '/kontakt': typeof KontaktRoute
   '/o-autorze': typeof OAutorzeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/$series': typeof SeriesRoute
   '/kontakt': typeof KontaktRoute
   '/o-autorze': typeof OAutorzeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/$series': typeof SeriesRoute
   '/kontakt': typeof KontaktRoute
   '/o-autorze': typeof OAutorzeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/kontakt' | '/o-autorze'
+  fullPaths: '/' | '/$series' | '/kontakt' | '/o-autorze'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/kontakt' | '/o-autorze'
-  id: '__root__' | '/' | '/kontakt' | '/o-autorze'
+  to: '/' | '/$series' | '/kontakt' | '/o-autorze'
+  id: '__root__' | '/' | '/$series' | '/kontakt' | '/o-autorze'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  SeriesRoute: typeof SeriesRoute
   KontaktRoute: typeof KontaktRoute
   OAutorzeRoute: typeof OAutorzeRoute
 }
@@ -75,6 +85,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof KontaktRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/$series': {
+      id: '/$series'
+      path: '/$series'
+      fullPath: '/$series'
+      preLoaderRoute: typeof SeriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -87,6 +104,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  SeriesRoute: SeriesRoute,
   KontaktRoute: KontaktRoute,
   OAutorzeRoute: OAutorzeRoute,
 }
