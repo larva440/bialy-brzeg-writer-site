@@ -33,7 +33,7 @@ function Index() {
             params={{ series: "dziennik-schizofrenika" }}
             className="group inline-flex items-center gap-3 border-b border-ink pb-1 text-sm uppercase tracking-[0.25em] text-ink"
           >
-            Dziennik Schizofrenika
+            Dziennik
             <span className="transition-transform group-hover:translate-x-1">→</span>
           </Link>
         </div>
