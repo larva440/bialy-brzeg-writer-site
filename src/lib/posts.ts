@@ -71,22 +71,34 @@ function published(series: string, now: Date): Post[] {
     .sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
 }
 
+function resolveNow(preview?: string): Date {
+  if (preview) {
+    const m = /^(\d{4})(\d{2})(\d{2})$/.exec(preview);
+    if (m) {
+      const d = new Date(`${m[1]}-${m[2]}-${m[3]}T23:59:59Z`);
+      if (!Number.isNaN(d.getTime())) return d;
+    }
+  }
+  return new Date();
+}
+
 export const getAllSeries = createServerFn({ method: "GET" }).handler(
   async () => seriesList(),
 );
 
 export const getSeriesPage = createServerFn({ method: "GET" })
-  .inputValidator((series: unknown) => String(series))
-  .handler(async ({ data: series }) => {
-    const meta = seriesList().find((s) => s.slug === series) ?? null;
+  .inputValidator((input: unknown) => input as { series: string; preview?: string })
+  .handler(async ({ data }) => {
+    const meta = seriesList().find((s) => s.slug === data.series) ?? null;
     if (!meta) return null;
-    return { meta, posts: published(series, new Date()) };
+    return { meta, posts: published(data.series, resolveNow(data.preview)) };
   });
 
 export const getPostBundle = createServerFn({ method: "GET" })
-  .inputValidator((input: unknown) => input as { series: string; slug: string })
+  .inputValidator((input: unknown) => input as { series: string; slug: string; preview?: string })
   .handler(async ({ data }) => {
-    const list = published(data.series, new Date());
+    const now = resolveNow(data.preview);
+    const list = published(data.series, now);
     const idx = list.findIndex((p) => p.slug === data.slug);
     if (idx === -1) return null;
     const meta = seriesList().find((s) => s.slug === data.series) ?? null;
@@ -97,3 +109,4 @@ export const getPostBundle = createServerFn({ method: "GET" })
       next: list[idx - 1] ?? null,
     };
   });
+

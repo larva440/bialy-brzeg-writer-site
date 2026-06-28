@@ -9,8 +9,14 @@ import { SiteLayout } from "@/components/SiteLayout";
 import { getSeriesPage, type Post } from "@/lib/posts";
 
 export const Route = createFileRoute("/$series")({
-  loader: async ({ params }) => {
-    const data = await getSeriesPage({ data: params.series });
+  validateSearch: (s: Record<string, unknown>) => ({
+    hakerDoor: typeof s.hakerDoor === "string" ? s.hakerDoor : undefined,
+  }),
+  loaderDeps: ({ search }) => ({ hakerDoor: search.hakerDoor }),
+  loader: async ({ params, deps }) => {
+    const data = await getSeriesPage({
+      data: { series: params.series, preview: deps.hakerDoor },
+    });
     if (!data) throw notFound();
     return data;
   },
@@ -65,6 +71,7 @@ function SeriesLayout() {
               <Link
                 to="/$series/$slug"
                 params={{ series: meta.slug, slug: post.slug }}
+                search={(prev) => prev}
                 className="group block"
               >
                 <p className="mb-3 text-xs uppercase tracking-[0.25em] text-muted-foreground">
