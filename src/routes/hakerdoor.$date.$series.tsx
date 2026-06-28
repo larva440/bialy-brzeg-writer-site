@@ -8,6 +8,15 @@ import {
 import { SiteLayout } from "@/components/SiteLayout";
 import { getSeriesPage, type Post } from "@/lib/posts";
 
+function teaserText(post: Post): string {
+  const src = (post.content?.[0] ?? post.excerpt ?? "").trim();
+  const MAX = 220;
+  if (src.length <= MAX) return src;
+  const slice = src.slice(0, MAX);
+  const sp = slice.lastIndexOf(" ");
+  return slice.slice(0, sp > 80 ? sp : MAX).replace(/[\s.,;:—–-]+$/u, "");
+}
+
 export const Route = createFileRoute("/hakerdoor/$date/$series")({
   loader: async ({ params }) => {
     const data = await getSeriesPage({
@@ -72,7 +81,7 @@ function PreviewSeriesLayout() {
                   {post.title}
                 </h2>
                 <p className="mt-4 font-serif text-base leading-relaxed text-ink-soft md:text-lg">
-                  {post.excerpt}
+                  „{teaserText(post)}…”
                 </p>
                 <span className="mt-4 inline-block text-xs uppercase tracking-[0.25em] text-muted-foreground transition-colors group-hover:text-ink">
                   Czytaj →
