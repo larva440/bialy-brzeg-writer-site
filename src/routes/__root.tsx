@@ -11,6 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { getAllSeries } from "../lib/posts";
 
 function NotFoundComponent() {
   return (
@@ -73,6 +74,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
+  loader: () => getAllSeries(),
   head: () => ({
     meta: [
       { charSet: "utf-8" },

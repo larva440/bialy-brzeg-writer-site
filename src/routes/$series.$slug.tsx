@@ -2,16 +2,18 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { getPostBundle } from "@/lib/posts";
 
-export const Route = createFileRoute("/w-drodze/$slug")({
+export const Route = createFileRoute("/$series/$slug")({
   loader: async ({ params }) => {
-    const bundle = await getPostBundle({ data: params.slug });
+    const bundle = await getPostBundle({
+      data: { series: params.series, slug: params.slug },
+    });
     if (!bundle) throw notFound();
     return bundle;
   },
   head: ({ loaderData }) => {
     const post = loaderData?.post;
-    const title = post ? `${post.title} — Biały Brzeg` : "W Drodze — Biały Brzeg";
-    const desc = post?.excerpt ?? "Wpis z bloga Białego Brzegu.";
+    const title = post ? `${post.title} — Biały Brzeg` : "Biały Brzeg";
+    const desc = post?.excerpt ?? "";
     return {
       meta: [
         { title },
@@ -26,8 +28,11 @@ export const Route = createFileRoute("/w-drodze/$slug")({
     <SiteLayout>
       <div className="mx-auto max-w-2xl px-6 py-32 text-center">
         <h1 className="font-serif text-3xl text-ink">Nie znaleziono wpisu</h1>
-        <Link to="/w-drodze" className="mt-8 inline-block border-b border-ink pb-1 text-sm uppercase tracking-[0.25em]">
-          Wróć do listy
+        <Link
+          to="/"
+          className="mt-8 inline-block border-b border-ink pb-1 text-sm uppercase tracking-[0.25em]"
+        >
+          Wróć
         </Link>
       </div>
     </SiteLayout>
@@ -36,16 +41,19 @@ export const Route = createFileRoute("/w-drodze/$slug")({
 });
 
 function PostPage() {
-  const { post, prev, next } = Route.useLoaderData();
+  const { meta, post, prev, next } = Route.useLoaderData();
+  const seriesSlug = meta?.slug ?? post.series;
+  const seriesName = meta?.name ?? seriesSlug;
 
   return (
     <SiteLayout>
       <article className="mx-auto max-w-2xl px-6 py-24 md:py-32">
         <Link
-          to="/w-drodze"
+          to="/$series"
+          params={{ series: seriesSlug }}
           className="mb-12 inline-block text-xs uppercase tracking-[0.25em] text-muted-foreground hover:text-ink"
         >
-          ← W Drodze
+          ← {seriesName}
         </Link>
         <p className="mb-4 text-xs uppercase tracking-[0.3em] text-muted-foreground">
           {post.dateLabel}
@@ -62,30 +70,39 @@ function PostPage() {
           <div>
             {prev && (
               <Link
-                to="/w-drodze/$slug"
-                params={{ slug: prev.slug }}
+                to="/$series/$slug"
+                params={{ series: seriesSlug, slug: prev.slug }}
                 className="block text-muted-foreground hover:text-ink"
               >
-                <span className="block text-xs uppercase tracking-[0.25em]">Poprzedni</span>
-                <span className="mt-1 block font-serif text-base text-ink">{prev.title}</span>
+                <span className="block text-xs uppercase tracking-[0.25em]">
+                  Poprzedni
+                </span>
+                <span className="mt-1 block font-serif text-base text-ink">
+                  {prev.title}
+                </span>
               </Link>
             )}
           </div>
           <div className="text-right">
             {next && (
               <Link
-                to="/w-drodze/$slug"
-                params={{ slug: next.slug }}
+                to="/$series/$slug"
+                params={{ series: seriesSlug, slug: next.slug }}
                 className="block text-muted-foreground hover:text-ink"
               >
-                <span className="block text-xs uppercase tracking-[0.25em]">Następny</span>
-                <span className="mt-1 block font-serif text-base text-ink">{next.title}</span>
+                <span className="block text-xs uppercase tracking-[0.25em]">
+                  Następny
+                </span>
+                <span className="mt-1 block font-serif text-base text-ink">
+                  {next.title}
+                </span>
               </Link>
             )}
           </div>
         </nav>
         <p className="mt-16 text-center text-xs leading-relaxed text-muted-foreground">
-          Jeśli mierzysz się z kryzysem — Centrum Wsparcia dla osób w kryzysie psychicznym:{" "}
+          Jeśli mierzysz się z kryzysem — Centrum Wsparcia dla osób w kryzysie
+          psychicznym:{" "}
           <a href="tel:+48800702222" className="underline-offset-4 hover:underline">
             800 70 2222
           </a>{" "}
