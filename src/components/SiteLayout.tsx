@@ -1,10 +1,20 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useLoaderData } from "@tanstack/react-router";
 import type { ReactNode } from "react";
+import type { SeriesMeta } from "@/lib/posts";
 
-function NavLink({ to, children }: { to: string; children: ReactNode }) {
+function NavLink({
+  to,
+  params,
+  children,
+}: {
+  to: string;
+  params?: Record<string, string>;
+  children: ReactNode;
+}) {
   return (
     <Link
       to={to}
+      params={params as any}
       className="text-sm tracking-wide text-ink-soft transition-colors hover:text-ink"
       activeProps={{ className: "text-ink" }}
       activeOptions={{ exact: to === "/" }}
@@ -16,6 +26,9 @@ function NavLink({ to, children }: { to: string; children: ReactNode }) {
 
 export function SiteLayout({ children }: { children: ReactNode }) {
   const year = new Date().getFullYear();
+  const series = (useLoaderData({ from: "__root__", strict: false }) ??
+    []) as SeriesMeta[];
+
   return (
     <div className="flex min-h-screen flex-col bg-paper text-foreground">
       <header className="border-b border-rule/60">
@@ -25,7 +38,11 @@ export function SiteLayout({ children }: { children: ReactNode }) {
           </Link>
           <nav className="flex items-center gap-6 md:gap-10">
             <NavLink to="/o-autorze">O autorze</NavLink>
-            <NavLink to="/w-drodze">W Drodze</NavLink>
+            {series.map((s) => (
+              <NavLink key={s.slug} to="/$series" params={{ series: s.slug }}>
+                {s.name}
+              </NavLink>
+            ))}
             <NavLink to="/kontakt">Kontakt</NavLink>
           </nav>
         </div>
