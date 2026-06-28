@@ -41,13 +41,12 @@ export const Route = createFileRoute("/hakerdoor/$date/$series")({
 
 function PreviewSeriesLayout() {
   const matches = useMatches();
+  const { date } = Route.useParams();
+  const { meta, posts } = Route.useLoaderData();
   const isChild = matches.some(
     (m) => m.routeId === "/hakerdoor/$date/$series/$slug",
   );
   if (isChild) return <Outlet />;
-
-  const { date } = Route.useParams();
-  const { meta, posts } = Route.useLoaderData();
 
   return (
     <SiteLayout>
