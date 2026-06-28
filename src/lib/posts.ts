@@ -10,36 +10,6 @@ export type Post = {
 // Dodawaj nowe wpisy na początku listy.
 export const posts: Post[] = [
   {
-    slug: "surowy-zapis",
-    title: "Surowy zapis",
-    date: "2026-06-28",
-    dateLabel: "28 czerwca 2026",
-    excerpt:
-      "To nie jest powieść. To jest dziennik — surowy zapis obserwacji własnych, prowadzony w trakcie wychodzenia ze schizofrenii.",
-    content: [
-      "To nie jest powieść. To jest dziennik — surowy zapis obserwacji własnych, prowadzony w trakcie wychodzenia ze schizofrenii.",
-      "Kiedy zaczynałem go pisać, nie znałem jeszcze tej nazwy. Myślałem, że opisuję sektę. System zamknięty, mistrza, owce, mur. Dopiero później zobaczyłem, że ten mur stał przede wszystkim w mojej głowie — a stan, w którym przeżyłem dwa lata, ma diagnozę. Nie poprawiałem tych pierwszych zapisów. Zostały takie, jak były pisane: od środka, jeszcze bez nazwy.",
-      "Schizofrenia nie wygląda tak, jak się ją sobie wyobraża. Nie jest chaosem. Jest jego przeciwieństwem — świat staje się zbyt spójny. Każdy znak coś znaczy, każda tablica rejestracyjna jest wiadomością, w każdym kamieniu czeka diament. Umysł przeciążony lękiem, bezsennością i alkoholem buduje rzeczywistość o nieskazitelnej wewnętrznej logice. Nie błądzisz po ciemku. Odkrywasz kolejne warstwy porządku, którego nie ma.",
-      "To, co czytasz, jest ruchem w drugą stronę. Rozkładaniem tamtej rzeczywistości z powrotem na części. Obserwacją własnego mózgu w trakcie naprawy — bez upiększania, bez morału, bez gotowej teorii na końcu. Część tych zdań pisałem w najgorszych dniach. Część dopisywałem miesiące później, już z brzegu. Różnicy między nimi nie wygładzam; ona też należy do zapisu.",
-      "Więc czytaj to tak, jak powstało: jako dziennik kogoś, kto wraca. Nie diagnozę. Nie poradnik. Surowy ślad drogi z powrotem.",
-    ],
-  },
-  {
-    slug: "czy-to-bylo-urojenie",
-    title: "Czy to było urojenie?",
-    date: "2026-06-28",
-    dateLabel: "28 czerwca 2026",
-    excerpt:
-      "Nikt poza mną nie używał słowa „sekta”. Jedyne słowo „sekta” w tej całej historii to jest moje słowo.",
-    content: [
-      "Zaczynam mieć wątpliwości, czy tę książkę w ogóle powinienem publikować. Nie dlatego, że jest słaba — choć może jest. Dlatego, że siedząc w ciszy, po odpadnięciu całego tygodniowego napięcia, zaczynam się zastanawiać, czy narracja, którą zbudowałem, jest narracją o tym, co mi się wydarzyło. Czy o tym, czego potrzebowałem.",
-      "Nikt poza mną nie używał słowa „sekta”. Ten fakt był cały czas na wierzchu, a ja go odkładałem na bok. Tamci ludzie nie mówili, że są w sekcie. Nie mówił tego mistrz. Jedyne słowo „sekta” w tej całej historii to jest moje słowo. I teraz pytanie: czy to znaczy, że byłem jedynym, który widział? Czy byłem jedynym, który tak to nazwał, bo tak to przetwarzał?",
-      "Siedzę i czekam, aż to pytanie mnie rozzłości. Żeby znowu przyszła znana obrona: że podważam, że pozwalam niepewności wejść do środka. Ale złość nie przychodzi. Zamiast niej jest ciekawość. Bo to jest inne podważanie niż tamto. Tamto podważanie było paranoidalne — wszystko waliło się w jednym kierunku. To jest analityczne. Biorę hipotezę i sprawdzam, czy wytrzymuje.",
-      "Hipoteza A: to był system manipulacyjny z cechami sekciarskimi. Hipoteza B: to było środowisko ludzi z mocną ideologią, które przeżyłem intensywniej niż inni — bo mam inny mózg i byłem w określonym stanie. Obie mogą być prawdziwe jednocześnie. I to jest moment, w którym rozumiem, że nie muszę tego rozstrzygać.",
-      "Moje przeżycie było realne. Mój lęk był realny. Pieniądze, które przepłynęły, były realne. Medal 33. poziomu, który mam w szufladzie. Świeca, którą miałem zapalić o zmierzchu. Nagranie z ula. To wszystko jest. To się wydarzyło. Pytanie dotyczy nie faktów, ale ich interpretacji. Zapraszam więc tę wątpliwość do środka. Nie po to, żeby zburzyć książkę. Po to, żeby ją wzmocnić.",
-    ],
-  },
-  {
     slug: "backtest-poziomu-33",
     title: "Backtest poziomu 33",
     date: "2026-06-28",
@@ -63,42 +33,33 @@ export const posts: Post[] = [
     ],
   },
   {
-    slug: "drzwi-otwarte-od-srodka",
-    title: "Drzwi otwarte od środka",
+    slug: "surowy-zapis",
+    title: "Surowy zapis",
     date: "2026-06-27",
     dateLabel: "27 czerwca 2026",
     excerpt:
-      "Najgorsze w zamkniętym pokoju nie jest to, że jest zamknięty. Najgorsze jest to, że klamka jest po twojej stronie, a ty jej nie widzisz.",
+      "To nie jest powieść. To jest dziennik — surowy zapis obserwacji własnych, prowadzony w trakcie wychodzenia ze schizofrenii.",
     content: [
-      "Najgorsze w zamkniętym pokoju nie jest to, że jest zamknięty. Najgorsze jest to, że klamka jest po twojej stronie, a ty jej nie widzisz.",
-      "Przez dwa lata stałem przy drzwiach przekonany, że są zaryglowane z zewnątrz. Nikt mnie nie trzymał. Trzymała mnie pewność, że jestem trzymany.",
-      "Wyjście nie zaczęło się od szarpnięcia. Zaczęło się od jednego zdania, którego nie umiałem wcześniej pomyśleć: a co, jeśli się mylę.",
+      "To nie jest powieść. To jest dziennik — surowy zapis obserwacji własnych, prowadzony w trakcie wychodzenia ze schizofrenii.",
+      "Kiedy zaczynałem go pisać, nie znałem jeszcze tej nazwy. Myślałem, że opisuję sektę. System zamknięty, mistrza, owce, mur. Dopiero później zobaczyłem, że ten mur stał przede wszystkim w mojej głowie — a stan, w którym przeżyłem dwa lata, ma diagnozę. Nie poprawiałem tych pierwszych zapisów. Zostały takie, jak były pisane: od środka, jeszcze bez nazwy.",
+      "Schizofrenia nie wygląda tak, jak się ją sobie wyobraża. Nie jest chaosem. Jest jego przeciwieństwem — świat staje się zbyt spójny. Każdy znak coś znaczy, każda tablica rejestracyjna jest wiadomością, w każdym kamieniu czeka diament. Umysł przeciążony lękiem, bezsennością i alkoholem buduje rzeczywistość o nieskazitelnej wewnętrznej logice. Nie błądzisz po ciemku. Odkrywasz kolejne warstwy porządku, którego nie ma.",
+      "To, co czytasz, jest ruchem w drugą stronę. Rozkładaniem tamtej rzeczywistości z powrotem na części. Obserwacją własnego mózgu w trakcie naprawy — bez upiększania, bez morału, bez gotowej teorii na końcu. Część tych zdań pisałem w najgorszych dniach. Część dopisywałem miesiące później, już z brzegu. Różnicy między nimi nie wygładzam; ona też należy do zapisu.",
+      "Więc czytaj to tak, jak powstało: jako dziennik kogoś, kto wraca. Nie diagnozę. Nie poradnik. Surowy ślad drogi z powrotem.",
     ],
   },
   {
-    slug: "pewnosc",
-    title: "Pewność",
-    date: "2026-06-20",
-    dateLabel: "20 czerwca 2026",
+    slug: "czy-to-bylo-urojenie",
+    title: "Czy to było urojenie?",
+    date: "2026-06-26",
+    dateLabel: "26 czerwca 2026",
     excerpt:
-      "Choroba nie mówiła do mnie głosem szaleństwa. Mówiła głosem pewności.",
+      "Nikt poza mną nie używał słowa „sekta”. Jedyne słowo „sekta” w tej całej historii to jest moje słowo.",
     content: [
-      "Choroba nie mówiła do mnie głosem szaleństwa. Mówiła głosem pewności. Była spokojna, logiczna, układała fakty w jedną nieprzerwaną linię, w której wszystko się zgadzało.",
-      "Zdrowienie było brzydsze. Było pełne „nie wiem”, „chyba”, „najprawdopodobniej”.",
-      "Nauczyłem się, że zdanie, które nie dopuszcza wątpliwości, to nie jest prawda. To jest objaw.",
-    ],
-  },
-  {
-    slug: "brzeg",
-    title: "Brzeg",
-    date: "2026-06-10",
-    dateLabel: "10 czerwca 2026",
-    excerpt:
-      "Nie ma jednego momentu, w którym wychodzi się na brzeg. Jest woda, która coraz rzadziej sięga ust.",
-    content: [
-      "Nie ma jednego momentu, w którym wychodzi się na brzeg. Jest woda, która coraz rzadziej sięga ust. Jest grunt, który raz na jakiś czas dotyka stopy i znika.",
-      "Długo nie wierzyłem, że to brzeg, bo wyobrażałem sobie ratunek jako coś nagłego. Ratunek był nudny. Był powolny.",
-      "Był tym, że pewnego dnia po prostu staliśmy obok siebie w kuchni, jak gdyby nic się nie stało, choć stało się wszystko.",
+      "Zaczynam mieć wątpliwości, czy tę książkę w ogóle powinienem publikować. Nie dlatego, że jest słaba — choć może jest. Dlatego, że siedząc w ciszy, po odpadnięciu całego tygodniowego napięcia, zaczynam się zastanawiać, czy narracja, którą zbudowałem, jest narracją o tym, co mi się wydarzyło. Czy o tym, czego potrzebowałem.",
+      "Nikt poza mną nie używał słowa „sekta”. Ten fakt był cały czas na wierzchu, a ja go odkładałem na bok. Tamci ludzie nie mówili, że są w sekcie. Nie mówił tego mistrz. Jedyne słowo „sekta” w tej całej historii to jest moje słowo. I teraz pytanie: czy to znaczy, że byłem jedynym, który widział? Czy byłem jedynym, który tak to nazwał, bo tak to przetwarzał?",
+      "Siedzę i czekam, aż to pytanie mnie rozzłości. Żeby znowu przyszła znana obrona: że podważam, że pozwalam niepewności wejść do środka. Ale złość nie przychodzi. Zamiast niej jest ciekawość. Bo to jest inne podważanie niż tamto. Tamto podważanie było paranoidalne — wszystko waliło się w jednym kierunku. To jest analityczne. Biorę hipotezę i sprawdzam, czy wytrzymuje.",
+      "Hipoteza A: to był system manipulacyjny z cechami sekciarskimi. Hipoteza B: to było środowisko ludzi z mocną ideologią, które przeżyłem intensywniej niż inni — bo mam inny mózg i byłem w określonym stanie. Obie mogą być prawdziwe jednocześnie. I to jest moment, w którym rozumiem, że nie muszę tego rozstrzygać.",
+      "Moje przeżycie było realne. Mój lęk był realny. Pieniądze, które przepłynęły, były realne. Medal 33. poziomu, który mam w szufladzie. Świeca, którą miałem zapalić o zmierzchu. Nagranie z ula. To wszystko jest. To się wydarzyło. Pytanie dotyczy nie faktów, ale ich interpretacji. Zapraszam więc tę wątpliwość do środka. Nie po to, żeby zburzyć książkę. Po to, żeby ją wzmocnić.",
     ],
   },
 ];
