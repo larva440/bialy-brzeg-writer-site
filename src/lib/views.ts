@@ -1,4 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
+import { getCfEnv } from "./cf-env";
 type D1Bound = {
   first: <T = Record<string, unknown>>() => Promise<T | null>;
   run: () => Promise<unknown>;
@@ -8,11 +9,8 @@ type D1Like = {
 };
 
 function getDB(): D1Like | null {
-  // Nitro cloudflare-module ustawia globalThis.__env__ = env przy każdym requeście
-  const e = (globalThis as Record<string, unknown>).__env__ as
-    | { DB?: D1Like }
-    | undefined;
-  return e?.DB ?? null;
+  const e = getCfEnv();
+  return (e?.DB as D1Like | undefined) ?? null;
 }
 
 // Odczyt licznika (nie zmienia danych).
