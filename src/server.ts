@@ -1,3 +1,4 @@
+// deploy-touch: test bindingu D1
 import "./lib/error-capture";
 
 import { consumeLastCapturedError } from "./lib/error-capture";
