@@ -17,6 +17,23 @@ function teaserText(post: Post): string {
   return slice.slice(0, sp > 80 ? sp : MAX).replace(/[\s.,;:—–-]+$/u, "");
 }
 
+function readingTime(post: Post): string {
+  const words = (post.content ?? [])
+    .join(" ")
+    .split(/\s+/u)
+    .filter(Boolean).length;
+  const min = Math.max(1, Math.round(words / 200));
+  const last = min % 10;
+  const last2 = min % 100;
+  const unit =
+    min === 1
+      ? "minuta"
+      : last >= 2 && last <= 4 && (last2 < 12 || last2 > 14)
+        ? "minuty"
+        : "minut";
+  return `${min} ${unit} czytania`;
+}
+
 export const Route = createFileRoute("/hakerdoor/$date/$series")({
   loader: async ({ params }) => {
     const data = await getSeriesPage({
