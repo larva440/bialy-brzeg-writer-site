@@ -9,4 +9,4 @@ export default defineConfig({
       d1Databases: ["DB"],
     },
   },
-});
+} as Parameters<typeof defineConfig>[0]);
