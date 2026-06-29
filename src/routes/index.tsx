@@ -30,7 +30,7 @@ function Index() {
         <div className="mt-14">
           <Link
             to="/$series"
-            params={{ series: "dziennik-schizofrenika" }}
+            params={{ series: "dziennik" }}
             className="group inline-flex items-center gap-3 border-b border-ink pb-1 text-sm uppercase tracking-[0.25em] text-ink"
           >
             Dziennik
