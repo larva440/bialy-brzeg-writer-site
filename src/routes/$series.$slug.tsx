@@ -71,6 +71,23 @@ function PostPage() {
           ))}
         </div>
         <ShareBar title={post.title} />
+        {post.keywords && post.keywords.length > 0 && (
+          <div className="mt-12 border-t border-rule/70 pt-8">
+            <p className="mb-4 text-xs uppercase tracking-[0.3em] text-muted-foreground">
+              Hasła
+            </p>
+            <ul className="flex flex-wrap gap-2">
+              {post.keywords.map((k: string) => (
+                <li
+                  key={k}
+                  className="rounded-full border border-rule px-3 py-1 text-xs uppercase tracking-[0.15em] text-muted-foreground"
+                >
+                  {k}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
         <nav className="mt-20 flex justify-between gap-6 border-t border-rule/70 pt-8 text-sm">
           <div>
             {prev && (

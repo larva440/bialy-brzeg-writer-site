@@ -6,6 +6,7 @@ export type Post = {
   date: string; // "YYYY-MM-DD" — zaplanowana data publikacji
   dateLabel: string;
   excerpt: string;
+  keywords?: string[];
   content: string[];
   series: string;
 };
