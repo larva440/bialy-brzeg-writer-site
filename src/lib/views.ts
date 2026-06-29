@@ -11,7 +11,12 @@ function getDB(): D1Like | null {
   const g = (globalThis as Record<string, unknown>).__cfEnv as
     | { DB?: D1Like }
     | undefined;
-  return g?.DB ?? null;
+  if (g?.DB) {
+    console.log("[D1] getDB: znaleziono DB w __cfEnv");
+    return g.DB;
+  }
+  console.log("[D1] getDB: brak DB, __cfEnv =", JSON.stringify(g));
+  return null;
 }
 
 // Odczyt licznika (nie zmienia danych).
