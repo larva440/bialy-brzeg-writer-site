@@ -1,6 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { getPostBundle } from "@/lib/posts";
+import { ViewCounter } from "@/components/ViewCounter";
 
 export const Route = createFileRoute("/$series/$slug")({
   loader: async ({ params }) => {
@@ -57,6 +58,7 @@ function PostPage() {
         </Link>
         <p className="mb-4 text-xs uppercase tracking-[0.3em] text-muted-foreground">
           {post.dateLabel}
+          <ViewCounter series={seriesSlug} slug={post.slug} />
         </p>
         <h1 className="mb-12 font-serif text-3xl leading-tight text-ink md:text-5xl">
           {post.title}
