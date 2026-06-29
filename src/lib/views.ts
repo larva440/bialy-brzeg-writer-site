@@ -8,15 +8,11 @@ type D1Like = {
 };
 
 function getDB(): D1Like | null {
-  const g = (globalThis as Record<string, unknown>).__cfEnv as
+  // Nitro cloudflare-module ustawia globalThis.__env__ = env przy każdym requeście
+  const e = (globalThis as Record<string, unknown>).__env__ as
     | { DB?: D1Like }
     | undefined;
-  if (g?.DB) {
-    console.log("[D1] getDB: znaleziono DB w __cfEnv");
-    return g.DB;
-  }
-  console.log("[D1] getDB: brak DB, __cfEnv =", JSON.stringify(g));
-  return null;
+  return e?.DB ?? null;
 }
 
 // Odczyt licznika (nie zmienia danych).
