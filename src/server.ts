@@ -41,6 +41,7 @@ async function normalizeCatastrophicSsrResponse(response: Response): Promise<Res
 
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
+    setCfEnv(request, env);
     try {
       const handler = await getServerEntry();
       const response = await normalizeCatastrophicSsrResponse(
