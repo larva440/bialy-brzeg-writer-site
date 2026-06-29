@@ -111,7 +111,7 @@ function PostPage() {
           </a>{" "}
           (całodobowo, bezpłatnie).
         </p>
-        <DebugOverlay series={seriesSlug} slug={post.slug} />
+        
       </article>
     </SiteLayout>
   );
