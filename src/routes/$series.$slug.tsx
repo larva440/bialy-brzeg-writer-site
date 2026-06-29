@@ -3,6 +3,8 @@ import { SiteLayout } from "@/components/SiteLayout";
 import { getPostBundle } from "@/lib/posts";
 import { ViewCounter } from "@/components/ViewCounter";
 import { ShareBar } from "@/components/ShareBar";
+import { Comments } from "@/components/Comments";
+
 
 
 export const Route = createFileRoute("/$series/$slug")({
@@ -122,6 +124,7 @@ function PostPage() {
             )}
           </div>
         </nav>
+        <Comments series={seriesSlug} slug={post.slug} />
         <p className="mt-16 text-center text-xs leading-relaxed text-muted-foreground">
           Jeśli mierzysz się z kryzysem — Centrum Wsparcia dla osób w kryzysie
           psychicznym:{" "}
