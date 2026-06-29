@@ -1,4 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
+import { env as cfEnv } from "cloudflare:workers";
 
 type D1Bound = {
   first: <T = Record<string, unknown>>() => Promise<T | null>;
@@ -9,11 +10,14 @@ type D1Like = {
 };
 
 function getDB(): D1Like | null {
-  const env = (globalThis as Record<string, unknown>).__cfEnv as
+  const fromCf = (cfEnv as { DB?: D1Like } | undefined)?.DB;
+  if (fromCf) return fromCf;
+  const g = (globalThis as Record<string, unknown>).__cfEnv as
     | { DB?: D1Like }
     | undefined;
-  return env?.DB ?? null;
+  return g?.DB ?? null;
 }
+
 
 // Odczyt licznika (nie zmienia danych).
 export const getViewCount = createServerFn({ method: "GET" })
