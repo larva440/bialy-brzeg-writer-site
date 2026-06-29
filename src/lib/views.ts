@@ -1,5 +1,4 @@
 import { createServerFn } from "@tanstack/react-start";
-import { getCfEnv } from "./cf-env";
 type D1Bound = {
   first: <T = Record<string, unknown>>() => Promise<T | null>;
   run: () => Promise<unknown>;
@@ -9,8 +8,10 @@ type D1Like = {
 };
 
 function getDB(): D1Like | null {
-  const e = getCfEnv();
-  return (e?.DB as D1Like | undefined) ?? null;
+  const e = (globalThis as Record<string, unknown>).__env__ as
+    | { DB?: D1Like }
+    | undefined;
+  return e?.DB ?? null;
 }
 
 // Odczyt licznika (nie zmienia danych).
@@ -30,10 +31,7 @@ export const getViewCount = createServerFn({ method: "GET" })
 export const registerView = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => input as { series: string; slug: string })
   .handler(async ({ data }) => {
-    const allGlobalKeys = Object.keys(globalThis).filter(k => k.startsWith('__'));
-    console.log("[SERVER] registerView called. Global __ keys:", JSON.stringify(allGlobalKeys));
-    const envVal = (globalThis as Record<string, unknown>).__env__;
-    console.log("[SERVER] __env__ value:", envVal ? JSON.stringify(Object.keys(envVal as object)) : "undefined");
+
     const db = getDB();
     if (!db) return 0;
     const row = await db
