@@ -7,26 +7,18 @@ type D1Like = {
   prepare: (sql: string) => { bind: (...args: unknown[]) => D1Bound };
 };
 
-async function getDB(): Promise<D1Like | null> {
-  try {
-    const mod = await import(/* @vite-ignore */ "cloudflare:workers");
-    const fromCf = (mod as { env?: { DB?: D1Like } }).env?.DB;
-    if (fromCf) return fromCf;
-  } catch {
-    /* nie jesteśmy w środowisku Workers — używamy fallbacku */
-  }
+function getDB(): D1Like | null {
   const g = (globalThis as Record<string, unknown>).__cfEnv as
     | { DB?: D1Like }
     | undefined;
   return g?.DB ?? null;
 }
 
-
 // Odczyt licznika (nie zmienia danych).
 export const getViewCount = createServerFn({ method: "GET" })
   .inputValidator((input: unknown) => input as { series: string; slug: string })
   .handler(async ({ data }) => {
-    const db = await getDB();
+    const db = getDB();
     if (!db) return 0;
     const row = await db
       .prepare("SELECT count FROM views WHERE series = ? AND slug = ?")
@@ -39,7 +31,7 @@ export const getViewCount = createServerFn({ method: "GET" })
 export const registerView = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => input as { series: string; slug: string })
   .handler(async ({ data }) => {
-    const db = await getDB();
+    const db = getDB();
     if (!db) return 0;
     const row = await db
       .prepare(
