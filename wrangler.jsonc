@@ -1,0 +1,11 @@
+{
+  "name": "bialy-brzeg-writer-site",
+  "compatibility_date": "2024-09-23",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "bialybrzeg",
+      "database_id": "b48e4047-5a31-4202-9d01-c8bffa822704"
+    }
+  ]
+}
