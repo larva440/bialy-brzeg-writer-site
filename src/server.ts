@@ -3,10 +3,24 @@ import "./lib/error-capture";
 
 import { consumeLastCapturedError } from "./lib/error-capture";
 import { renderErrorPage } from "./lib/error-page";
+// @ts-expect-error - nitro/runtime nie ma typów w tym setupie
+import { useNitroApp } from "nitro/runtime";
 
 type ServerEntry = {
   fetch: (request: Request, env: unknown, ctx: unknown) => Promise<Response> | Response;
 };
+
+// Wstrzykuj cloudflare env do kontekstu każdego requestu
+const nitroApp = useNitroApp();
+nitroApp.hooks.hook("request", (event: { context: Record<string, unknown> }) => {
+  const cfEnv = (event.context as Record<string, unknown>).cloudflare as
+    | { env?: Record<string, unknown> }
+    | undefined;
+  if (cfEnv?.env) {
+    (globalThis as Record<string, unknown>).__cfEnv = cfEnv.env;
+  }
+});
+
 
 let serverEntryPromise: Promise<ServerEntry> | undefined;
 
