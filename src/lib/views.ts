@@ -31,10 +31,7 @@ export const getViewCount = createServerFn({ method: "GET" })
 export const registerView = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => input as { series: string; slug: string })
   .handler(async ({ data }) => {
-    const allGlobalKeys = Object.keys(globalThis).filter(k => k.startsWith('__'));
-    console.log("[SERVER] registerView called. Global __ keys:", JSON.stringify(allGlobalKeys));
-    const envVal = (globalThis as Record<string, unknown>).__env__;
-    console.log("[SERVER] __env__ value:", envVal ? JSON.stringify(Object.keys(envVal as object)) : "undefined");
+
     const db = getDB();
     if (!db) return 0;
     const row = await db
