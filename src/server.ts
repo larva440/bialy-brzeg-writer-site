@@ -12,7 +12,7 @@ type ServerEntry = {
 
 // Wstrzykuj cloudflare env do kontekstu każdego requestu
 const nitroApp = useNitroApp();
-nitroApp.hooks.hook("request", (event) => {
+nitroApp.hooks.hook("request", (event: { context: Record<string, unknown> }) => {
   const cfEnv = (event.context as Record<string, unknown>).cloudflare as
     | { env?: Record<string, unknown> }
     | undefined;
