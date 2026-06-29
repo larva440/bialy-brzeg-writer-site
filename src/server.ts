@@ -3,6 +3,7 @@ import "./lib/error-capture";
 
 import { consumeLastCapturedError } from "./lib/error-capture";
 import { renderErrorPage } from "./lib/error-page";
+// @ts-expect-error - nitro/runtime nie ma typów w tym setupie
 import { useNitroApp } from "nitro/runtime";
 
 type ServerEntry = {
