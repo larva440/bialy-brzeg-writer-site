@@ -77,7 +77,7 @@ function PostPage() {
               Hasła
             </p>
             <ul className="flex flex-wrap gap-2">
-              {post.keywords.map((k) => (
+              {post.keywords.map((k: string) => (
                 <li
                   key={k}
                   className="rounded-full border border-rule px-3 py-1 text-xs uppercase tracking-[0.15em] text-muted-foreground"
