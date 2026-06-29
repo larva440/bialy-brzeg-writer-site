@@ -17,6 +17,23 @@ function teaserText(post: Post): string {
   return slice.slice(0, sp > 80 ? sp : MAX).replace(/[\s.,;:—–-]+$/u, "");
 }
 
+function readingTime(post: Post): string {
+  const words = (post.content ?? [])
+    .join(" ")
+    .split(/\s+/u)
+    .filter(Boolean).length;
+  const min = Math.max(1, Math.round(words / 200));
+  const last = min % 10;
+  const last2 = min % 100;
+  const unit =
+    min === 1
+      ? "minuta"
+      : last >= 2 && last <= 4 && (last2 < 12 || last2 > 14)
+        ? "minuty"
+        : "minut";
+  return `${min} ${unit} czytania`;
+}
+
 export const Route = createFileRoute("/$series")({
   loader: async ({ params }) => {
     const data = await getSeriesPage({ data: { series: params.series } });
@@ -76,7 +93,7 @@ function SeriesLayout() {
                 className="group block"
               >
                 <p className="mb-3 text-xs uppercase tracking-[0.25em] text-muted-foreground">
-                  {post.dateLabel}
+                  {post.dateLabel} · {readingTime(post)}
                 </p>
                 <h2 className="font-serif text-2xl text-ink transition-colors group-hover:text-ink-soft md:text-3xl">
                   {post.title}
