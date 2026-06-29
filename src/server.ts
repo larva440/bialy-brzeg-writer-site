@@ -1,4 +1,4 @@
-// deploy-touch: test bindingu D1
+// deploy-touch: test bindingu D1 (2026-06-29)
 import "./lib/error-capture";
 
 import { consumeLastCapturedError } from "./lib/error-capture";
