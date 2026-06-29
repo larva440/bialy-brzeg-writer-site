@@ -33,6 +33,7 @@ export function ViewCounter({
         if (already) {
           n = await getViewCount({ data: { series, slug } });
         } else {
+          console.log("[ViewCounter] wywołuję registerView", { series, slug, already });
           n = await registerView({ data: { series, slug } });
           try {
             sessionStorage.setItem(key, "1");
@@ -41,8 +42,8 @@ export function ViewCounter({
           }
         }
         if (!cancelled) setCount(n);
-      } catch {
-        /* licznik to ozdoba — nie blokujemy strony */
+      } catch (err) {
+        console.error("[ViewCounter] błąd:", err);
       }
     })();
     return () => {
