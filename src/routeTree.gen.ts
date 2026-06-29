@@ -11,8 +11,10 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as OAutorzeRouteImport } from './routes/o-autorze'
 import { Route as KontaktRouteImport } from './routes/kontakt'
+import { Route as DziennikSchizofrenikaRouteImport } from './routes/dziennik-schizofrenika'
 import { Route as SeriesRouteImport } from './routes/$series'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DziennikSchizofrenikaSlugRouteImport } from './routes/dziennik-schizofrenika.$slug'
 import { Route as SeriesSlugRouteImport } from './routes/$series.$slug'
 import { Route as HakerdoorDateSeriesRouteImport } from './routes/hakerdoor.$date.$series'
 import { Route as HakerdoorDateSeriesSlugRouteImport } from './routes/hakerdoor.$date.$series.$slug'
@@ -27,6 +29,11 @@ const KontaktRoute = KontaktRouteImport.update({
   path: '/kontakt',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DziennikSchizofrenikaRoute = DziennikSchizofrenikaRouteImport.update({
+  id: '/dziennik-schizofrenika',
+  path: '/dziennik-schizofrenika',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SeriesRoute = SeriesRouteImport.update({
   id: '/$series',
   path: '/$series',
@@ -37,6 +44,12 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DziennikSchizofrenikaSlugRoute =
+  DziennikSchizofrenikaSlugRouteImport.update({
+    id: '/$slug',
+    path: '/$slug',
+    getParentRoute: () => DziennikSchizofrenikaRoute,
+  } as any)
 const SeriesSlugRoute = SeriesSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -56,18 +69,22 @@ const HakerdoorDateSeriesSlugRoute = HakerdoorDateSeriesSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$series': typeof SeriesRouteWithChildren
+  '/dziennik-schizofrenika': typeof DziennikSchizofrenikaRouteWithChildren
   '/kontakt': typeof KontaktRoute
   '/o-autorze': typeof OAutorzeRoute
   '/$series/$slug': typeof SeriesSlugRoute
+  '/dziennik-schizofrenika/$slug': typeof DziennikSchizofrenikaSlugRoute
   '/hakerdoor/$date/$series': typeof HakerdoorDateSeriesRouteWithChildren
   '/hakerdoor/$date/$series/$slug': typeof HakerdoorDateSeriesSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$series': typeof SeriesRouteWithChildren
+  '/dziennik-schizofrenika': typeof DziennikSchizofrenikaRouteWithChildren
   '/kontakt': typeof KontaktRoute
   '/o-autorze': typeof OAutorzeRoute
   '/$series/$slug': typeof SeriesSlugRoute
+  '/dziennik-schizofrenika/$slug': typeof DziennikSchizofrenikaSlugRoute
   '/hakerdoor/$date/$series': typeof HakerdoorDateSeriesRouteWithChildren
   '/hakerdoor/$date/$series/$slug': typeof HakerdoorDateSeriesSlugRoute
 }
@@ -75,9 +92,11 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/$series': typeof SeriesRouteWithChildren
+  '/dziennik-schizofrenika': typeof DziennikSchizofrenikaRouteWithChildren
   '/kontakt': typeof KontaktRoute
   '/o-autorze': typeof OAutorzeRoute
   '/$series/$slug': typeof SeriesSlugRoute
+  '/dziennik-schizofrenika/$slug': typeof DziennikSchizofrenikaSlugRoute
   '/hakerdoor/$date/$series': typeof HakerdoorDateSeriesRouteWithChildren
   '/hakerdoor/$date/$series/$slug': typeof HakerdoorDateSeriesSlugRoute
 }
@@ -86,27 +105,33 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/$series'
+    | '/dziennik-schizofrenika'
     | '/kontakt'
     | '/o-autorze'
     | '/$series/$slug'
+    | '/dziennik-schizofrenika/$slug'
     | '/hakerdoor/$date/$series'
     | '/hakerdoor/$date/$series/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/$series'
+    | '/dziennik-schizofrenika'
     | '/kontakt'
     | '/o-autorze'
     | '/$series/$slug'
+    | '/dziennik-schizofrenika/$slug'
     | '/hakerdoor/$date/$series'
     | '/hakerdoor/$date/$series/$slug'
   id:
     | '__root__'
     | '/'
     | '/$series'
+    | '/dziennik-schizofrenika'
     | '/kontakt'
     | '/o-autorze'
     | '/$series/$slug'
+    | '/dziennik-schizofrenika/$slug'
     | '/hakerdoor/$date/$series'
     | '/hakerdoor/$date/$series/$slug'
   fileRoutesById: FileRoutesById
@@ -114,6 +139,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   SeriesRoute: typeof SeriesRouteWithChildren
+  DziennikSchizofrenikaRoute: typeof DziennikSchizofrenikaRouteWithChildren
   KontaktRoute: typeof KontaktRoute
   OAutorzeRoute: typeof OAutorzeRoute
   HakerdoorDateSeriesRoute: typeof HakerdoorDateSeriesRouteWithChildren
@@ -135,6 +161,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof KontaktRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dziennik-schizofrenika': {
+      id: '/dziennik-schizofrenika'
+      path: '/dziennik-schizofrenika'
+      fullPath: '/dziennik-schizofrenika'
+      preLoaderRoute: typeof DziennikSchizofrenikaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/$series': {
       id: '/$series'
       path: '/$series'
@@ -148,6 +181,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/dziennik-schizofrenika/$slug': {
+      id: '/dziennik-schizofrenika/$slug'
+      path: '/$slug'
+      fullPath: '/dziennik-schizofrenika/$slug'
+      preLoaderRoute: typeof DziennikSchizofrenikaSlugRouteImport
+      parentRoute: typeof DziennikSchizofrenikaRoute
     }
     '/$series/$slug': {
       id: '/$series/$slug'
@@ -184,6 +224,19 @@ const SeriesRouteChildren: SeriesRouteChildren = {
 const SeriesRouteWithChildren =
   SeriesRoute._addFileChildren(SeriesRouteChildren)
 
+interface DziennikSchizofrenikaRouteChildren {
+  DziennikSchizofrenikaSlugRoute: typeof DziennikSchizofrenikaSlugRoute
+}
+
+const DziennikSchizofrenikaRouteChildren: DziennikSchizofrenikaRouteChildren = {
+  DziennikSchizofrenikaSlugRoute: DziennikSchizofrenikaSlugRoute,
+}
+
+const DziennikSchizofrenikaRouteWithChildren =
+  DziennikSchizofrenikaRoute._addFileChildren(
+    DziennikSchizofrenikaRouteChildren,
+  )
+
 interface HakerdoorDateSeriesRouteChildren {
   HakerdoorDateSeriesSlugRoute: typeof HakerdoorDateSeriesSlugRoute
 }
@@ -198,6 +251,7 @@ const HakerdoorDateSeriesRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   SeriesRoute: SeriesRouteWithChildren,
+  DziennikSchizofrenikaRoute: DziennikSchizofrenikaRouteWithChildren,
   KontaktRoute: KontaktRoute,
   OAutorzeRoute: OAutorzeRoute,
   HakerdoorDateSeriesRoute: HakerdoorDateSeriesRouteWithChildren,
