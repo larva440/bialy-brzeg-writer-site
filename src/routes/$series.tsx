@@ -95,7 +95,7 @@ function SeriesLayout() {
                 <p className="mb-3 text-xs uppercase tracking-[0.25em] text-muted-foreground">
                   {post.dateLabel} · {readingTime(post)}
                 </p>
-                <h2 className="font-serif text-3xl text-ink transition-colors group-hover:text-ink-soft md:text-4xl">
+                <h2 className="font-serif text-2xl text-ink transition-colors group-hover:text-ink-soft md:text-3xl">
                   {post.title}
                 </h2>
                 <p className="mt-4 font-serif text-base leading-relaxed text-ink-soft md:text-lg">

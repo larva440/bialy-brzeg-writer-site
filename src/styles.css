@@ -71,7 +71,7 @@
 @utility prose-literary {
   font-family: var(--font-serif);
   font-size: var(--prose-size, 1.25rem);
-  line-height: 1.85;
+  line-height: 1.6;
   color: var(--color-ink-soft);
   & p {
     margin-bottom: 1.6em;
