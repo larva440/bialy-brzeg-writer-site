@@ -1,6 +1,4 @@
 import { createServerFn } from "@tanstack/react-start";
-import { env as cfEnv } from "cloudflare:workers";
-
 type D1Bound = {
   first: <T = Record<string, unknown>>() => Promise<T | null>;
   run: () => Promise<unknown>;
@@ -9,9 +7,14 @@ type D1Like = {
   prepare: (sql: string) => { bind: (...args: unknown[]) => D1Bound };
 };
 
-function getDB(): D1Like | null {
-  const fromCf = (cfEnv as { DB?: D1Like } | undefined)?.DB;
-  if (fromCf) return fromCf;
+async function getDB(): Promise<D1Like | null> {
+  try {
+    const mod = await import(/* @vite-ignore */ "cloudflare:workers");
+    const fromCf = (mod as { env?: { DB?: D1Like } }).env?.DB;
+    if (fromCf) return fromCf;
+  } catch {
+    /* nie jesteśmy w środowisku Workers — używamy fallbacku */
+  }
   const g = (globalThis as Record<string, unknown>).__cfEnv as
     | { DB?: D1Like }
     | undefined;
@@ -23,7 +26,7 @@ function getDB(): D1Like | null {
 export const getViewCount = createServerFn({ method: "GET" })
   .inputValidator((input: unknown) => input as { series: string; slug: string })
   .handler(async ({ data }) => {
-    const db = getDB();
+    const db = await getDB();
     if (!db) return 0;
     const row = await db
       .prepare("SELECT count FROM views WHERE series = ? AND slug = ?")
@@ -36,7 +39,7 @@ export const getViewCount = createServerFn({ method: "GET" })
 export const registerView = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => input as { series: string; slug: string })
   .handler(async ({ data }) => {
-    const db = getDB();
+    const db = await getDB();
     if (!db) return 0;
     const row = await db
       .prepare(
