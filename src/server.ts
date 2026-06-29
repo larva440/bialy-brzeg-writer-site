@@ -1,6 +1,7 @@
 // deploy-touch: test bindingu D1 (2026-06-29)
 import "./lib/error-capture";
 
+import { setCfEnv } from "./lib/cf-env";
 import { consumeLastCapturedError } from "./lib/error-capture";
 import { renderErrorPage } from "./lib/error-page";
 
