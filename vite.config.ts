@@ -6,7 +6,13 @@ export default defineConfig({
   },
   nitro: {
     cloudflare: {
-      d1Databases: ["DB"],
-    },
+      d1Databases: [
+        {
+          binding: "DB",
+          database_name: "bialybrzeg",
+          database_id: "b48e4047-5a31-4202-9d01-c8bffa822704",
+        },
+      ],
+    } as Record<string, unknown>,
   },
 } as Parameters<typeof defineConfig>[0]);
