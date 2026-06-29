@@ -92,7 +92,7 @@ function PreviewSeriesLayout() {
                 className="group block"
               >
                 <p className="mb-3 text-xs uppercase tracking-[0.25em] text-muted-foreground">
-                  {post.dateLabel}
+                  {post.dateLabel} · {readingTime(post)}
                 </p>
                 <h2 className="font-serif text-2xl text-ink transition-colors group-hover:text-ink-soft md:text-3xl">
                   {post.title}
