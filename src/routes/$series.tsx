@@ -78,9 +78,6 @@ function SeriesLayout() {
   return (
     <SiteLayout>
       <section className="mx-auto max-w-3xl px-6 py-24 md:py-32">
-        <p className="mb-6 text-xs uppercase tracking-[0.3em] text-muted-foreground">
-          {meta.name}
-        </p>
         <h1 className="mb-16 font-serif text-3xl text-ink md:text-4xl">
           {meta.heading || meta.name}
         </h1>
