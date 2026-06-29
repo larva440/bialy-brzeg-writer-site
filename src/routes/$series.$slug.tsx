@@ -2,6 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { getPostBundle } from "@/lib/posts";
 import { ViewCounter } from "@/components/ViewCounter";
+import { ShareBar } from "@/components/ShareBar";
 
 
 export const Route = createFileRoute("/$series/$slug")({
@@ -69,6 +70,7 @@ function PostPage() {
             <p key={i}>{p}</p>
           ))}
         </div>
+        <ShareBar title={post.title} />
         <nav className="mt-20 flex justify-between gap-6 border-t border-rule/70 pt-8 text-sm">
           <div>
             {prev && (
