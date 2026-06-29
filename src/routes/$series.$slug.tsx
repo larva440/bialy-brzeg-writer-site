@@ -2,6 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { getPostBundle } from "@/lib/posts";
 import { ViewCounter } from "@/components/ViewCounter";
+import { DebugOverlay } from "@/components/DebugOverlay";
 
 export const Route = createFileRoute("/$series/$slug")({
   loader: async ({ params }) => {
@@ -110,6 +111,7 @@ function PostPage() {
           </a>{" "}
           (całodobowo, bezpłatnie).
         </p>
+        <DebugOverlay series={seriesSlug} slug={post.slug} />
       </article>
     </SiteLayout>
   );
