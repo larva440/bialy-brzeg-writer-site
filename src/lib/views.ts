@@ -26,7 +26,7 @@ async function getDB(): Promise<D1Like | null> {
 export const getViewCount = createServerFn({ method: "GET" })
   .inputValidator((input: unknown) => input as { series: string; slug: string })
   .handler(async ({ data }) => {
-    const db = getDB();
+    const db = await getDB();
     if (!db) return 0;
     const row = await db
       .prepare("SELECT count FROM views WHERE series = ? AND slug = ?")
@@ -39,7 +39,7 @@ export const getViewCount = createServerFn({ method: "GET" })
 export const registerView = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => input as { series: string; slug: string })
   .handler(async ({ data }) => {
-    const db = getDB();
+    const db = await getDB();
     if (!db) return 0;
     const row = await db
       .prepare(
