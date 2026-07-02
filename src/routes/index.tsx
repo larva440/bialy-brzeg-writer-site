@@ -21,7 +21,7 @@ function Index() {
           Biały Brzeg — pseudonim literacki
         </p>
         <h1 className="font-serif text-4xl leading-[1.15] text-ink md:text-6xl md:leading-[1.1]">
-          „Na pewno — było właśnie tą chorobą.”
+          „Na pewno - było właśnie tą chorobą.”
         </h1>
         <p className="mt-10 max-w-xl font-serif text-lg leading-relaxed text-ink-soft md:text-xl">
           Teksty o kryzysie, pamięci i zamkniętych systemach. O odzyskiwaniu
